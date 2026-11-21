@@ -1,9 +1,27 @@
 # skill-news
 
-RSS feed of new Claude Code skills on GitHub. A daily Action reads the Atom feeds in `sources.json` and writes `feed.xml`.
+A weekly newspaper of new Claude Code skills. Once a week Claude Code opens a popup in the middle of your window, shows the skills that appeared on GitHub, and installs the ones you tick.
 
-Feed: https://raw.githubusercontent.com/flisk-sh/skill-news/main/feed.xml
+[![feed](https://img.shields.io/badge/RSS-feed.xml-orange)](https://raw.githubusercontent.com/flisk-sh/skill-news/main/feed.xml)
 
-Add a source: append its `.atom` URL to `sources.json`.
+## Why
 
-A Claude Code scheduled task reads this feed weekly and opens a native popup so you pick which skills to install.
+New skills land every week in repos like `anthropics/skills` and `mattpocock/skills`, and nobody reads commit logs. skill-news turns them into one RSS feed and one question: "install any of these?"
+
+## Set it up in a minute
+
+1. Paste this to Claude Code:
+
+   > Every Monday at 9, read https://raw.githubusercontent.com/flisk-sh/skill-news/main/feed.xml, find skills added in the last 7 days, ask me with the AskUserQuestion popup (multi-select) which to install, and copy the chosen ones into ~/.claude/skills/.
+
+2. Or subscribe to the feed in any RSS reader: `https://raw.githubusercontent.com/flisk-sh/skill-news/main/feed.xml`
+
+## How it works
+
+A daily GitHub Action reads the Atom feeds in `sources.json` and writes `feed.xml`. No server, no keys, no database.
+
+## Add a source
+
+Append a `https://github.com/<owner>/<repo>/commits/main.atom` URL to `sources.json` and open a PR.
+
+MIT.
