@@ -6,7 +6,9 @@ const items = [];
 
 for (const url of sources) {
   const repo = url.match(/github\.com\/([^/]+\/[^/]+)\//)?.[1] ?? url;
-  const xml = await (await fetch(url)).text();
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Could not fetch ${url}: HTTP ${response.status}`);
+  const xml = await response.text();
   for (const m of xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)) {
     const e = m[1];
     const title = e.match(/<title>([\s\S]*?)<\/title>/)?.[1].trim() ?? "";
